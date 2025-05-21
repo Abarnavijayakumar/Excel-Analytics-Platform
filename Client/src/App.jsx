@@ -3,7 +3,7 @@ import React from 'react'
 import Home from './Components/Home'
 // import styles from '../src/Styles/Home.module.css'
 import NavbarComponent from './Components/NavbarComponent'
-import Features  from './Components/Features'
+// import Features  from './Components/Features'
 import About from './Components/About'
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <NavbarComponent />
       <Home />
       <About />
-      <Features />
+      
       
 </>
   )

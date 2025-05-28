@@ -14,7 +14,7 @@ function Home() {
           <span className="text-blue-700">Excellytics</span> <span className='text-black'>transforms your Excel data into </span><br />
           <span className="text-yellow-400">interactive charts</span> <span className='text-black'>& smart insights</span>
         </h1>
-        <p className="dark:text-slat-500 text-xl font-semibold md:text-xl mb-6">
+        <p className="dark:text-slate-500 text-xl font-semibold md:text-xl mb-6">
           Upload Excel files, choose chart types, generate downloadable graphs, and get AI-powered insights — all in one dashboard.
         </p>
         <div className="flex gap-4 justify-center md:justify-start">

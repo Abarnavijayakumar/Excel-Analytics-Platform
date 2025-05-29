@@ -44,7 +44,7 @@ function About() {
             <h1 className="text-4xl md:text-5xl font-bold text-center">About Us</h1>
           </div>
           <p className="text-center text-gray-600 max-w-2xl mx-auto text-lg mt-3">
-            Discover the story behind DataWise — our values, our mission, and the innovative journey to unlock the power of Excel analytics for all.
+            Discover the story behind Excelytics — our values, our mission, and the innovative journey to unlock the power of Excel analytics for all.
           </p>
         </motion.div>
 
@@ -162,7 +162,7 @@ function About() {
           className="mt-20 bg-blue-100 rounded-xl p-10 text-center"
         >
           <h2 className="text-2xl font-bold mb-2 text-blue-800">Ready to unlock your data?</h2>
-          <p className="text-gray-700 mb-4">Join DataWise and start transforming your spreadsheets into smart insights.</p>
+          <p className="text-gray-700 mb-4">Join Excelytics and start transforming your spreadsheets into smart insights.</p>
           <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
             Get Started
           </button>

@@ -1,18 +1,20 @@
 // ChartGallery.jsx
 import { motion } from "framer-motion";
-import chartImg1 from '../assets/chartmakerimg1.png';
-import chartImg2 from '../assets/chartmakerimg2.png';
+import chartImg1 from '../assets/ChartMaker1.jpeg';
+import chartImg2 from '../assets/DataAnalyzer2.jpeg';
 
 const charts = [
   {
     title: "3D Surface Chart",
     type: "Advanced Visualization",
     image: chartImg1,
+    buttonLabel: "ChartMaker",
   },
   {
     title: "Sales Bar Chart",
     type: "Dynamic Data View",
     image: chartImg2,
+    buttonLabel: "Data Analyzer",
   },
 ];
 
@@ -48,28 +50,35 @@ const ChartGallery = () => {
           {charts.map((chart, index) => (
             <motion.div
               key={index}
-              className="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white border border-gray-200"
+              className="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white hover:bg-[#f1f5ff] border border-gray-200"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
-              <div className="h-56 bg-white flex items-center justify-center border-b border-gray-100 relative">
+              {/* Image section - fills full width */}
+              <div className="w-full h-[260px] overflow-hidden relative rounded-t-xl">
                 <img
                   src={chart.image}
                   alt={chart.title}
-                  className="h-44 object-contain"
+                  className="w-full h-full object-cover"
                 />
+              </div>
+
+              {/* Text & Button section */}
+              <div className="p-6 text-left flex justify-between items-center gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                    {chart.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">{chart.type}</p>
+                </div>
                 <motion.button
-                  className="absolute bottom-2 right-2 bg-blue-600 text-white text-xs px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="bg-indigo-700 text-white text-base px-3 py-1 rounded-md shadow opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   whileHover={{ scale: 1.1 }}
                 >
-                  Click Me
+                  {chart.buttonLabel}
                 </motion.button>
-              </div>
-              <div className="p-6 text-left">
-                <h3 className="text-lg font-semibold text-gray-800 mb-1">{chart.title}</h3>
-                <p className="text-sm text-gray-600">{chart.type}</p>
               </div>
             </motion.div>
           ))}

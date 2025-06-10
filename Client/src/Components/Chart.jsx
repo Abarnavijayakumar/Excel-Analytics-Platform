@@ -25,7 +25,8 @@ const ChartGallery = () => {
       id="chart-gallery"
       style={{
         background:
-          "linear-gradient(90deg, rgba(72, 30, 223, 0.48) 0%, rgba(211, 195, 247, 0) 50%)",
+          "linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)",
+        backgroundAttachment: "fixed",
       }}
     >
       <div className="max-w-6xl mx-auto text-center">
@@ -48,14 +49,16 @@ const ChartGallery = () => {
 
         <div className="grid sm:grid-cols-2 gap-10">
           {charts.map((chart, index) => (
-            <motion.div
-              key={index}
-              className="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white hover:bg-[#f1f5ff] border border-gray-200"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-            >
+         <motion.div
+  key={index}
+  className="group rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 bg-transparent border border-white/20"
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  whileHover={{ scale: 1.03 }}
+  transition={{ duration: 0.5, delay: index * 0.2 }}
+>
+
+
               {/* Image section - fills full width */}
               <div className="w-full h-[260px] overflow-hidden relative rounded-t-xl">
                 <img

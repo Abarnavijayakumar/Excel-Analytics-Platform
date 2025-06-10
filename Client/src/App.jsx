@@ -3,6 +3,7 @@ import Home from './Components/Home';
 import NavbarComponent from './Components/NavbarComponent';
 import About from './Components/About';
 import Chart from './Components/Chart';
+import Pricing from './Components/Pricing';
 // import AOS from 'aos';
 // import 'aos/dist/aos.css';
 
@@ -17,6 +18,7 @@ function App() {
       <Home />
       <About />
       <Chart />
+      <Pricing />
     </>
   );
 }

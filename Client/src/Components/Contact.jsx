@@ -23,14 +23,14 @@ const Contact = () => {
 
             <div>
               <p>
-                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Email : </span>{" "} <span style={{fontFamily: ' "Savate", sans-serif'}}> support@excelanalytics.com</span>
+                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Email : </span>{" "} <span style={{fontFamily: ' "Roboto Condensed", sans-serif;'}}>  Support@excelanalytics.com</span>
                
               </p>
               <p>
-                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Phone : </span> <span style={{fontFamily: ' "Savate", sans-serif'}}>+91 98765 43210</span>
+                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Phone : </span> <span style={{fontFamily: '  "Roboto Condensed", sans-serif;'}}>  +91 98765 43210</span>
               </p>
               <p>
-                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Office Hours : </span> <span style={{fontFamily: ' "Savate", sans-serif'}}>Mon–Fri,9AM–6PM</span> 
+                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Office Hours : </span> <span style={{fontFamily: '   "Roboto Condensed", sans-serif;'}}> Mon–Fri,9AM–6PM</span> 
                 
               </p>
             </div>

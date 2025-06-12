@@ -1,31 +1,70 @@
-import React from 'react'
+import React, { useState } from "react";
+import { CheckCircle, FileBarChart2, ShieldCheck, Users } from "lucide-react";
 
 const Pricing = () => {
+  const [activePlan, setActivePlan] = useState("Pro");
+  const [billingCycle, setBillingCycle] = useState("Monthly");
+
+  const toggleBilling = () => {
+    setBillingCycle((prev) => (prev === "Monthly" ? "Yearly" : "Monthly"));
+  };
+
+  const prices = {
+    Free: { Monthly: "$0", Yearly: "$0" },
+    Pro: { Monthly: "$29", Yearly: "$290" },
+    Enterprise: { Monthly: "Custom", Yearly: "Custom" },
+  };
+
+  const planClass = (plan) =>
+    `flex flex-col rounded-xl shadow-md transition-all duration-300 transform cursor-pointer p-6 sm:p-8 ${
+      activePlan === plan
+        ? "bg-indigo-600 text-white scale-100"
+        : "bg-white hover:bg-blue-50 hover:scale-100"
+    }`;
+
+  const textClass = (plan) =>
+    activePlan === plan ? "text-white" : "text-gray-700";
+
+  const featuresClass = (plan) =>
+    `space-y-4 text-sm ${activePlan === plan ? "text-white" : "text-gray-700"}`;
+
   return (
-    <section className="relative bg-gradient-to-br from-indigo-900 via-blue-800 to-purple-900 py-20 px-4 sm:px-6 lg:px-8">
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="mx-auto max-w-5xl">
+<div className="bg-gradient-to-tr from-[#0f0c29] via-[#302b63] to-[#24243e]
+ min-h-screen w-full">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <div className="mx-auto max-w-2xl lg:max-w-5xl">
           {/* Header */}
-          <div className="mt-10 rounded-lg px-6 py-8 shadow-2xl shadow-violet-600/10 sm:p-10 lg:flex lg:items-center">
-            <div className="lg:w-0 lg:flex-1">
+          <div className="rounded-lg bg-gray-900 px-6 py-8 shadow-2xl shadow-violet-600/10 sm:p-10">
+            <div className="text-center lg:text-left">
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Pricing Plans
+                Flexible Plans for Every Team
               </h2>
-              <p className="mt-4 max-w-3xl text-lg text-gray-300">
-                Choose the plan that works best for you and your team.
+              <p className="mt-4 text-lg text-gray-300">
+                Whether you're analyzing small datasets or managing enterprise-scale reports,
+                we have a plan that fits your needs.
               </p>
             </div>
-            <div className="mt-12 sm:mt-16 lg:mt-0 lg:ml-8 lg:flex-shrink-0">
-              <div className="flex rounded-full shadow-sm">
+
+            {/* Billing Toggle */}
+            <div className="mt-6 flex justify-center sm:justify-start">
+              <div className="inline-flex rounded-full shadow-sm border border-gray-300 overflow-hidden">
                 <button
-                  type="button"
-                  className="relative inline-flex items-center rounded-l-full border border-transparent bg-gradient-to-r from-violet-500 to-indigo-600 px-6 py-3 text-sm font-medium text-white hover:from-violet-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2"
+                  onClick={() => setBillingCycle("Monthly")}
+                  className={`px-6 py-3 text-sm font-medium transition ${
+                    billingCycle === "Monthly"
+                      ? "bg-gradient-to-r from-violet-500 to-indigo-600 text-white"
+                      : "bg-white text-gray-700"
+                  }`}
                 >
                   Monthly
                 </button>
                 <button
-                  type="button"
-                  className="relative inline-flex items-center rounded-r-full border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2"
+                  onClick={() => setBillingCycle("Yearly")}
+                  className={`px-6 py-3 text-sm font-medium transition ${
+                    billingCycle === "Yearly"
+                      ? "bg-gradient-to-r from-violet-500 to-indigo-600 text-white"
+                      : "bg-white text-gray-700"
+                  }`}
                 >
                   Yearly
                 </button>
@@ -34,101 +73,84 @@ const Pricing = () => {
           </div>
 
           {/* Pricing Cards */}
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
-            {/* Standard Plan */}
-            <div className="flex flex-col rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-md transition hover:shadow-xl">
-              <div className="px-6 py-8 sm:p-10 sm:pb-6">
-                <span className="inline-flex rounded-full bg-violet-100 px-3 py-1 text-sm font-semibold text-violet-600">
-                  Standard
-                </span>
-                <div className="mt-4 flex items-baseline text-5xl font-extrabold text-white">
-                  $49
-                  <span className="ml-1 text-2xl font-medium text-gray-300">/mo</span>
-                </div>
-                <p className="mt-5 text-lg text-gray-200">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit distinctio!
-                </p>
-                <button
-                  type="button"
-                  className="mt-8 block w-full rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 py-3 px-5 font-medium text-white shadow hover:from-violet-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-violet-200"
+          <div className="mt-10">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {["Free", "Pro", "Enterprise"].map((plan) => (
+                <div
+                  key={plan}
+                  className={planClass(plan)}
+                  onClick={() => setActivePlan(plan)}
                 >
-                  Buy Standard
-                </button>
-              </div>
-              <div className="flex-1 rounded-b-xl p-6 sm:p-10 sm:pt-0">
-                <ul className="space-y-4">
-                  <li className="flex items-start text-white">
-                    <svg className="h-6 w-6 text-green-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
-                    </svg>
-                    <p className="ml-3 text-sm">Pariatur quod similique</p>
-                  </li>
-                  <li className="flex items-start text-white">
-                    <svg className="h-6 w-6 text-green-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
-                    </svg>
-                    <p className="ml-3 text-sm">Veritatis expedita eligendi</p>
-                  </li>
-                  <li className="flex items-start text-white">
-                    <svg className="h-6 w-6 text-green-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
-                    </svg>
-                    <p className="ml-3 text-sm">Accusamus quia totam</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
+                  <div>
+                    <span className="inline-flex rounded-full bg-violet-100 px-3 py-1 text-sm font-semibold text-violet-600">
+                      {plan}
+                    </span>
+                    <div className="mt-4 flex items-baseline text-3xl sm:text-4xl font-extrabold">
+                      {prices[plan][billingCycle]}{" "}
+                      {plan !== "Enterprise" && (
+                        <span className="ml-1 text-base sm:text-xl font-medium text-gray-500">
+                          /{billingCycle === "Monthly" ? "mo" : "yr"}
+                        </span>
+                      )}
+                    </div>
+                    <p className={`mt-4 text-sm sm:text-base ${textClass(plan)}`}>
+                      {plan === "Free" &&
+                        "Ideal for individuals or small teams getting started."}
+                      {plan === "Pro" &&
+                        "Best for growing teams needing advanced analytics."}
+                      {plan === "Enterprise" &&
+                        "Designed for large-scale teams & advanced workflows."}
+                    </p>
+                  </div>
 
-            {/* Premium Plan - You can copy the Standard and change values */}
-            <div className="flex flex-col rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-md transition hover:shadow-xl">
-              <div className="px-6 py-8 sm:p-10 sm:pb-6">
-                <span className="inline-flex rounded-full bg-yellow-100 px-3 py-1 text-sm font-semibold text-yellow-600">
-                  Premium
-                </span>
-                <div className="mt-4 flex items-baseline text-5xl font-extrabold text-white">
-                  $99
-                  <span className="ml-1 text-2xl font-medium text-gray-300">/mo</span>
+                  <div className="mt-6">
+                    <ul className={featuresClass(plan)}>
+                      {plan === "Free" && (
+                        <>
+                          <li><CheckCircle className="inline mr-2" size={18}/>3 Excel uploads/month</li>
+                          <li><FileBarChart2 className="inline mr-2" size={18}/>Basic 2D charts</li>
+                          <li><ShieldCheck className="inline mr-2" size={18}/>1 dashboard</li>
+                          <li><Users className="inline mr-2" size={18}/>Community support</li>
+                        </>
+                      )}
+                      {plan === "Pro" && (
+                        <>
+                          <li><CheckCircle className="inline mr-2" size={18}/>Unlimited uploads</li>
+                          <li><FileBarChart2 className="inline mr-2" size={18}/>2D & 3D charts</li>
+                          <li><ShieldCheck className="inline mr-2" size={18}/>Custom dashboards</li>
+                          <li><Users className="inline mr-2" size={18}/>Email support</li>
+                          <li><CheckCircle className="inline mr-2" size={18}/>Export charts</li>
+                        </>
+                      )}
+                      {plan === "Enterprise" && (
+                        <>
+                          <li><CheckCircle className="inline mr-2" size={18}/>All Pro features</li>
+                          <li><Users className="inline mr-2" size={18}/>Team collaboration</li>
+                          <li><ShieldCheck className="inline mr-2" size={18}/>Admin panel</li>
+                          <li><FileBarChart2 className="inline mr-2" size={18}/>Scheduled reports</li>
+                          <li><CheckCircle className="inline mr-2" size={18}/>AI assistant</li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
                 </div>
-                <p className="mt-5 text-lg text-gray-200">
-                  All features in Standard plus more premium tools.
-                </p>
-                <button
-                  type="button"
-                  className="mt-8 block w-full rounded-md bg-gradient-to-r from-yellow-500 to-yellow-700 py-3 px-5 font-medium text-white shadow hover:from-yellow-600 hover:to-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
-                >
-                  Buy Premium
-                </button>
-              </div>
-              <div className="flex-1 rounded-b-xl p-6 sm:p-10 sm:pt-0">
-                <ul className="space-y-4">
-                  <li className="flex items-start text-white">
-                    <svg className="h-6 w-6 text-green-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
-                    </svg>
-                    <p className="ml-3 text-sm">Everything in Standard</p>
-                  </li>
-                  <li className="flex items-start text-white">
-                    <svg className="h-6 w-6 text-green-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
-                    </svg>
-                    <p className="ml-3 text-sm">Priority Support</p>
-                  </li>
-                  <li className="flex items-start text-white">
-                    <svg className="h-6 w-6 text-green-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
-                    </svg>
-                    <p className="ml-3 text-sm">Advanced Analytics</p>
-                  </li>
-                </ul>
-              </div>
+              ))}
             </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-10 sm:mt-12">
+            <p className="text-base sm:text-lg text-gray-600">
+              Still not sure which plan fits you best?
+            </p>
+            <p className="text-indigo-700 font-semibold mt-2">
+              👉 Start with the Free Plan and upgrade anytime as your needs grow.
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-
-
-export default Pricing
+export default Pricing;

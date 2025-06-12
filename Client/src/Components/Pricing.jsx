@@ -29,7 +29,7 @@ const Pricing = () => {
     `space-y-4 text-sm ${activePlan === plan ? "text-white" : "text-gray-700"}`;
 
   return (
-<div className="bg-gradient-to-tr from-[#0f0c29] via-[#302b63] to-[#24243e]
+<div className="
  min-h-screen w-full">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
         <div className="mx-auto max-w-2xl lg:max-w-5xl">
@@ -118,7 +118,7 @@ const Pricing = () => {
                           <li><CheckCircle className="inline mr-2" size={18}/>Unlimited uploads</li>
                           <li><FileBarChart2 className="inline mr-2" size={18}/>2D & 3D charts</li>
                           <li><ShieldCheck className="inline mr-2" size={18}/>Custom dashboards</li>
-                          <li><Users className="inline mr-2" size={18}/>Email support</li>
+                          <li><Users className="inline mr-2" size={18}/> Email support</li>
                           <li><CheckCircle className="inline mr-2" size={18}/>Export charts</li>
                         </>
                       )}

@@ -3,14 +3,15 @@ import { useState } from 'react'
 import image from '../assets/Home.png'
 import style from '../Styles/Home.module.css'
 import { Button } from 'flowbite-react';
-import { useNavigate }  from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import { useNavigate }  from 'react-router-dom';
 
 function Home() {
-  const navigate = useNavigate();
-  const handleGetStarted = () =>{
-navigate('/Auth');
-  // You can add any additional logic here if needed
-  }
+//   const navigate = useNavigate();
+//   const handleGetStarted = () =>{
+// navigate('/auth');
+//   // You can add any additional logic here if needed
+//   }
   return (
     <main>
     <section className={`${style.bg} py-20 px-6 md:px-16 flex flex-col-reverse md:flex-row items-center justify-between`}>
@@ -24,9 +25,10 @@ navigate('/Auth');
           Upload Excel files, choose chart types, generate downloadable graphs, and get AI-powered insights — all in one dashboard.
         </p>
         <div className="flex gap-4 justify-center md:justify-start">
-          <Button onClick={handleGetStarted} className="bg-blue-600 hover:bg-blue-800 text-white font-semibold text-lg px-6 py-3 rounded-lg">
+          <Link to="/auth">
+          <Button className="bg-blue-600 hover:bg-blue-800 text-white font-semibold text-lg px-6 py-3 rounded-lg">
             Get Started
-          </Button>
+          </Button></Link>
           <Button color="gray" className="font-medium text-lg px-6 py-3 rounded-lg border border-gray-300">
             Learn More
           </Button>

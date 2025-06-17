@@ -1,37 +1,38 @@
 import React from "react";
+import { FaEnvelope, FaPhoneAlt, FaClock, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-[#1e1b4b] via-[#2e1065] to-[#4c1d95] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-4xl bg-white bg-opacity-10 backdrop-blur-md rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 className="text-3xl font-bold text-white text-center mb-8">
-          Contact Us
-        </h2>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-700 via-slate-600 to-black flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md rounded-2xl shadow-xl p-8 md:p-12">
+        <h2 className="text-3xl font-bold text-white text-center mb-8">Contact Us</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Contact Details */}
           <div className="text-white space-y-4">
-            <h3 className="text-3xl font-semibold" style={{fontFamily: '"Anton", sans-serif', fontWeight: "400"}}>Get in Touch</h3>
-           <p
-  className="text-lg "
-  style={{ fontFamily: '"Edu NSW ACT Hand Pre", cursive' }}
->
-  We'd love to hear from you. Whether you have a question about
-  features, trials, pricing, or anything else—our team is ready to
-  answer.
-</p>
+            <h3 className="text-3xl font-semibold" style={{ fontFamily: '"Anton", sans-serif' }}>
+              Get in Touch
+            </h3>
+            <p
+              className="text-base leading-relaxed"
+              style={{ fontFamily: '"Inter", sans-serif', fontWeight: 300 }}
+            >
+              Have questions about features, pricing, or support? We're here to help.
+              Reach out to our team and we'll get back to you as soon as possible.
+            </p>
 
-            <div>
-              <p>
-                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Email : </span>{" "} <span style={{fontFamily: ' "Roboto Condensed", sans-serif;'}}>  Support@excelanalytics.com</span>
-               
+            <div className="pt-4 space-y-3 text-lg">
+              <p className="flex items-center gap-3">
+                <FaEnvelope className="text-xl text-violet-300" />
+                <span style={{ fontFamily: '"Poppins", sans-serif' }}>Support@excelanalytics.com</span>
               </p>
-              <p>
-                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Phone : </span> <span style={{fontFamily: '  "Roboto Condensed", sans-serif;'}}>  +91 98765 43210</span>
+              <p className="flex items-center gap-3">
+                <FaPhoneAlt className="text-xl text-violet-300" />
+                <span style={{ fontFamily: '"Poppins", sans-serif' }}>+91 98765 43210</span>
               </p>
-              <p>
-                <span className="font-semibold" style={{ fontFamily: '"Anton", sans-serif', fontWeight: "400" }}>Office Hours : </span> <span style={{fontFamily: '   "Roboto Condensed", sans-serif;'}}> Mon–Fri,9AM–6PM</span> 
-                
+              <p className="flex items-center gap-3">
+                <FaClock className="text-xl text-violet-300" />
+                <span style={{ fontFamily: '"Poppins", sans-serif' }}>Mon–Fri, 9AM–6PM</span>
               </p>
             </div>
           </div>
@@ -58,7 +59,7 @@ const Contact = () => {
             ></textarea>
             <button
               type="submit"
-              className="w-full bg-violet-500 text-white py-3 rounded-md font-semibold hover:from-violet-600 hover:to-indigo-700 transition"
+              className="w-full bg-violet-500 text-white py-3 rounded-md font-semibold hover:bg-violet-600 transition"
             >
               Send Message
             </button>
@@ -67,9 +68,7 @@ const Contact = () => {
 
         {/* Social Links */}
         <div className="mt-12 text-center">
-          <h3 className="text-xl font-semibold text-white mb-4">
-            Connect With Us
-          </h3>
+          <h3 className="text-xl font-semibold text-white mb-4">Connect With Us</h3>
           <div className="flex justify-center gap-6">
             <a
               href="https://www.linkedin.com/in/abarna-vijay"
@@ -77,7 +76,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="text-white hover:text-violet-400 transition duration-300"
             >
-              <i className="fab fa-linkedin text-2xl"></i>
+              <FaLinkedin className="text-2xl" />
             </a>
             <a
               href="https://github.com/Abarnavijayakumar"
@@ -85,7 +84,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="text-white hover:text-violet-400 transition duration-300"
             >
-              <i className="fab fa-github text-2xl"></i>
+              <FaGithub className="text-2xl" />
             </a>
             <a
               href="https://twitter.com/your-handle"
@@ -93,7 +92,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="text-white hover:text-violet-400 transition duration-300"
             >
-              <i className="fab fa-twitter text-2xl"></i>
+              <FaTwitter className="text-2xl" />
             </a>
           </div>
         </div>

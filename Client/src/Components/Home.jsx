@@ -4,7 +4,8 @@ import image from '../assets/Home.png'
 import style from '../Styles/Home.module.css'
 import { Button } from 'flowbite-react';
 import { Link } from 'react-router-dom';
-// import { useNavigate }  from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
+
 
 function Home() {
 //   const navigate = useNavigate();
@@ -29,9 +30,17 @@ function Home() {
           <Button className="bg-blue-600 hover:bg-blue-800 text-white font-semibold text-lg px-6 py-3 rounded-lg">
             Get Started
           </Button></Link>
-          <Button color="gray" className="font-medium text-lg px-6 py-3 rounded-lg border border-gray-300">
-            Learn More
-          </Button>
+          <ScrollLink
+                to="about" // this should match the id of the target section
+                smooth={true}
+                duration={500}
+                offset={-80} // adjust for navbar height if needed
+              >
+  <Button color="gray" className="font-medium text-lg px-6 py-3 rounded-lg border border-gray-300">
+    Learn More
+  </Button>
+</ScrollLink>
+
         </div>
       </div>
 

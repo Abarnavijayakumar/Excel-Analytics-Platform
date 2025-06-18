@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import About1 from '../assets/team work1.jpg'
+import { useNavigate } from 'react-router-dom';
 import {
   Info,
   Users,
@@ -28,9 +29,10 @@ function About() {
       <h2 className="text-2xl font-semibold text-black-700">{title}</h2>
     </div>
   );
-
+  const navigate = useNavigate();
   return (
-    <div className="relative bg-white overflow-hidden min-h-screen text-[#1a1a1a]">
+    
+    <div id='about' className="relative bg-white overflow-hidden min-h-screen text-[#1a1a1a]">
       {/* Gradient background blobs */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse" />
@@ -163,9 +165,12 @@ function About() {
         >
           <h2 className="text-2xl font-bold mb-2 text-blue-800">Ready to unlock your data?</h2>
           <p className="text-gray-700 mb-4">Join Excelytics and start transforming your spreadsheets into smart insights.</p>
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-            Get Started
-          </button>
+        <button
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+          onClick={() => navigate("/auth")}  // or your signup/login route
+        >
+      Get Started
+    </button>
         </motion.div>
 
       </div>

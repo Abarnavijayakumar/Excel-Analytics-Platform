@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Home from './Components/Home';
 import NavbarComponent from './Components/NavbarComponent';
 import About from './Components/About';
@@ -17,6 +18,7 @@ const PageContent = () => {
 
   return (
     <>
+     <Toaster position="top-right" />
       {isHome && (
         <>
           <div id="home" className="scroll-mt-24"><Home /></div>

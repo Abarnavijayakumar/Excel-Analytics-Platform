@@ -173,7 +173,7 @@ function About() {
     </button>
         </motion.div>
 
-      </div>
+      </div> 
     </div>
   );
 }

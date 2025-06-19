@@ -1,228 +1,113 @@
 import React, { useState } from "react";
-import * as XLSX from "xlsx";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell,
-  Legend
-} from "recharts";
-import {
-  UploadCloud,
-  BarChart3,
-  PieChart as PieIcon,
-  FileText,
-  LayoutDashboard,
-  FolderOpen,
-  Upload,
-  User,
-  LogOut
-} from "lucide-react";
-
-const chartColors = ["#6366f1", "#facc15", "#10b981", "#f472b6", "#3b82f6"];
+import { Menu, Home, Upload, FileText, BarChart3, LogOut, User, CreditCard } from "lucide-react";
+import { Button } from "flowbite-react";
 
 const Dashboard = () => {
-  const [excelData, setExcelData] = useState([]);
-  const [chartType, setChartType] = useState("line");
-  const [columns, setColumns] = useState([]);
-
-  const user = { name: "Abc", email: "abc@example.com" }; // Replace with actual user context/state
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState(null);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      const data = new Uint8Array(evt.target.result);
-      const workbook = XLSX.read(data, { type: "array" });
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-      setExcelData(jsonData);
-      setColumns(Object.keys(jsonData[0]));
-    };
-    reader.readAsArrayBuffer(file);
-  };
-
-  const renderChart = () => {
-    if (!excelData.length || columns.length < 2) return null;
-
-    const xKey = columns[0];
-    const yKey = columns[1];
-
-    switch (chartType) {
-      case "bar":
-        return (
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={excelData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey={xKey} />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey={yKey} fill="#6366f1" />
-            </BarChart>
-          </ResponsiveContainer>
-        );
-      case "pie":
-        return (
-          <ResponsiveContainer width="100%" height={400}>
-            <PieChart>
-              <Pie
-                data={excelData}
-                dataKey={yKey}
-                nameKey={xKey}
-                cx="50%"
-                cy="50%"
-                outerRadius={130}
-                fill="#8884d8"
-                label
-              >
-                {excelData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={chartColors[index % chartColors.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        );
-      default:
-        return (
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={excelData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey={xKey} />
-              <YAxis />
-              <Tooltip />
-              <Line type="monotone" dataKey={yKey} stroke="#6366f1" strokeWidth={3} />
-            </LineChart>
-          </ResponsiveContainer>
-        );
+    if (file) {
+      setUploadedFile(file.name);
     }
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-lg p-6 hidden md:block">
-        <h2 className="text-2xl font-bold text-indigo-600 mb-8">Excellytics</h2>
-        <nav className="space-y-6">
-          <div className="flex items-center gap-3 text-gray-700 hover:text-indigo-600 cursor-pointer">
-            <LayoutDashboard className="w-5 h-5" /> Dashboard
+      <aside className="w-64 bg-white border-r p-6 space-y-6 shadow-sm hidden md:block">
+        <div className="flex items-center gap-2 text-blue-600 text-2xl font-bold">
+          <BarChart3 className="w-6 h-6" /> Excellytics
+        </div>
+        <nav className="space-y-4 text-gray-700 font-medium">
+          <div className="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+            <Home className="w-5 h-5" /> Home
           </div>
-          <div className="flex items-center gap-3 text-gray-700 hover:text-indigo-600 cursor-pointer">
-            <FolderOpen className="w-5 h-5" /> Uploaded Files
+          <div className="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+            <BarChart3 className="w-5 h-5" /> Dashboard
           </div>
-          <div className="flex items-center gap-3 text-gray-700 hover:text-indigo-600 cursor-pointer">
+          <div className="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+            <FileText className="w-5 h-5" /> Uploaded Files
+          </div>
+          <div className="flex items-center gap-2 cursor-pointer hover:text-blue-600">
             <Upload className="w-5 h-5" /> Upload New File
+          </div>
+          <div className="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+            <CreditCard className="w-5 h-5" /> Pricing
           </div>
         </nav>
       </aside>
 
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <header className="bg-white shadow px-6 py-4 flex justify-between items-center">
+      {/* Main Content */}
+      <main className="flex-1 p-6">
+        {/* Topbar */}
+        <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold text-gray-800">Dashboard</h1>
           <div className="relative">
             <img
               src="https://i.pravatar.cc/40"
-              alt="Profile"
-              className="w-10 h-10 rounded-full cursor-pointer border-2 border-indigo-500"
+              alt="profile"
+              className="w-10 h-10 rounded-full cursor-pointer"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
             />
-            {/* Dropdown Menu can be implemented here */}
-          </div>
-        </header>
-
-        {/* Main Content */}
-        <main className="p-6 md:p-10 space-y-10">
-          <div className="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="text-xl font-semibold text-gray-800">Welcome, {user.name} 👋</h2>
-              <p className="text-gray-500 text-sm">{user.email}</p>
-            </div>
-          </div>
-
-         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-            <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 text-white rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold">Files Uploaded</h3>
-              <p className="text-3xl font-bold mt-2">{excelData.length}</p>
-            </div>
-            <div className="bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold">Recent Upload</h3>
-              <p className="mt-2 text-sm">{excelData.length ? "File uploaded successfully" : "No files yet"}</p>
-            </div>
-            <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 text-white rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold">Chart Type</h3>
-              <p className="mt-2 text-sm capitalize">{chartType}</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl shadow p-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <label className="flex items-center gap-3">
-                <UploadCloud className="w-6 h-6 text-indigo-600" />
-                <input
-                  type="file"
-                  accept=".xlsx, .xls"
-                  onChange={handleFileUpload}
-                  className="text-sm text-gray-600"
-                />
-              </label>
-
-              <div className="flex gap-4">
-                <button
-                  onClick={() => setChartType("line")}
-                  className={`px-4 py-2 rounded-lg border font-medium transition ${
-                    chartType === "line" ? "bg-indigo-600 text-white" : "bg-white text-gray-700"
-                  }`}
-                >
-                  Line
-                </button>
-                <button
-                  onClick={() => setChartType("bar")}
-                  className={`px-4 py-2 rounded-lg border font-medium transition ${
-                    chartType === "bar" ? "bg-indigo-600 text-white" : "bg-white text-gray-700"
-                  }`}
-                >
-                  Bar
-                </button>
-                <button
-                  onClick={() => setChartType("pie")}
-                  className={`px-4 py-2 rounded-lg border font-medium transition ${
-                    chartType === "pie" ? "bg-indigo-600 text-white" : "bg-white text-gray-700"
-                  }`}
-                >
-                  Pie
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              {excelData.length === 0 ? (
-                <div className="text-center text-gray-500">
-                  <FileText className="mx-auto mb-2 w-10 h-10" />
-                  <p>No data available. Upload an Excel file to start visualizing.</p>
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2 z-50">
+                <div className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer">
+                  <User className="w-4 h-4" /> Profile
                 </div>
-              ) : (
-                renderChart()
-              )}
-            </div>
+                <div className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer">
+                  <Upload className="w-4 h-4" /> Upload File
+                </div>
+                <div className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer">
+                  <LogOut className="w-4 h-4" /> Logout
+                </div>
+              </div>
+            )}
           </div>
-        </main>
-      </div>
+        </div>
+
+        {/* Greeting */}
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-700">Welcome, Abc!</h2>
+          <p className="text-sm text-gray-500">Here's your recent activity</p>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="bg-blue-100 border border-blue-200 p-6 rounded-xl shadow text-center">
+            <h3 className="text-lg font-semibold text-blue-800">Uploaded Files</h3>
+            <p className="text-3xl font-bold text-blue-900 mt-2">7</p>
+          </div>
+          <div className="bg-green-100 border border-green-200 p-6 rounded-xl shadow text-center">
+            <h3 className="text-lg font-semibold text-green-800">Recent Uploads</h3>
+            <p className="text-3xl font-bold text-green-900 mt-2">3</p>
+          </div>
+          <div className="bg-yellow-100 border border-yellow-200 p-6 rounded-xl shadow text-center">
+            <h3 className="text-lg font-semibold text-yellow-800">History</h3>
+            <p className="text-3xl font-bold text-yellow-900 mt-2">15</p>
+          </div>
+        </div>
+
+        {/* Upload Section */}
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold text-gray-800">Recent Files</h3>
+            <label className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer text-sm hover:bg-blue-700">
+              Upload File
+              <input type="file" onChange={handleFileUpload} className="hidden" />
+            </label>
+          </div>
+
+          {uploadedFile ? (
+            <div className="text-green-700 font-medium">
+              ✅ {uploadedFile} uploaded successfully!
+            </div>
+          ) : (
+            <p className="text-gray-500 text-sm">No files uploaded yet.</p>
+          )}
+        </div>
+      </main>
     </div>
   );
 };

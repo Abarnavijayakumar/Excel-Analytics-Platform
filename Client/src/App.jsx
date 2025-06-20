@@ -1,4 +1,5 @@
 import React from 'react';
+// import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Home from './Components/Home';
@@ -38,12 +39,17 @@ const PageContent = () => {
 };
 
 function App() {
+  
   return (
+    <>
+   
+    
     <Router>
       <NavbarComponent />
       
       <PageContent />
     </Router>
+    </>
   );
 }
 

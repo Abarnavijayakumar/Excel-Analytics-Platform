@@ -3,42 +3,39 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaGoogle, FaGithub, FaLinkedin } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const AuthPage = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
   const navigate = useNavigate();
 
-  const toggleForm = () => {
-    setIsSignIn(!isSignIn);
-    // Reset form state
-    setEmail("");
-    setPassword("");
-    setFullName("");
-  };
+  const toggleForm = () => setIsSignIn(!isSignIn);
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-
-    if (!email || !password || (!isSignIn && !fullName)) {
-      toast.error("Please fill in all required fields");
-      return;
-    }
-
-    if (isSignIn) {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
       if (email === "test@gmail.com" && password === "1234") {
         toast.success("Login Successful");
         navigate("/dashboard");
       } else {
         toast.error("Invalid email or password");
       }
-    } else {
-      // Simulated signup logic
-      toast.success("Account created! Please sign in.");
+    }, 1500);
+  };
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("Account Created Successfully");
       setIsSignIn(true);
-    }
+    }, 1500);
   };
 
   return (
@@ -52,9 +49,9 @@ const AuthPage = () => {
       transition={{ duration: 1 }}
       className="min-h-screen flex items-center justify-center px-4"
     >
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster />
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
-        {/* Left Side */}
+        {/* Left Panel */}
         <AnimatePresence mode="wait">
           <motion.div
             key={isSignIn ? "signin-text" : "signup-text"}
@@ -81,7 +78,7 @@ const AuthPage = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Right Side (Form) */}
+        {/* Right Panel */}
         <AnimatePresence mode="wait">
           <motion.div
             key={isSignIn ? "signin-form" : "signup-form"}
@@ -95,37 +92,47 @@ const AuthPage = () => {
               {isSignIn ? "Sign In to Your Account" : "Create a New Account"}
             </h3>
 
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form
+              className="space-y-4"
+              onSubmit={isSignIn ? handleLogin : handleSignup}
+            >
               {!isSignIn && (
                 <input
                   type="text"
                   placeholder="Full Name"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
                 />
               )}
               <input
                 type="email"
                 placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <button
                 type="submit"
-                className="w-full bg-indigo-700 text-white py-2 rounded-md hover:bg-indigo-800 transition duration-200"
+                disabled={loading}
+                className="w-full bg-indigo-700 text-white py-2 rounded-md hover:bg-indigo-800 transition duration-200 flex items-center justify-center"
               >
-                {isSignIn ? "Sign In" : "Sign Up"}
+                {loading ? (
+    <ClipLoader size={22} color="#ffffff" />
+          ) : isSignIn ? (
+            "Sign In"
+          ) : (
+            "Sign Up"
+          )}
+
               </button>
             </form>
 

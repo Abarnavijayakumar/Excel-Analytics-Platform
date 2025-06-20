@@ -10,6 +10,7 @@ import Pricing from './Components/Pricing';
 import Contact from './Components/Contact';
 import AuthPage from './Components/AuthPage';
 import Dashboard from './Components/Dashboard';
+import Notfound from './Components/Notfound';
 
 const PageContent = () => {
   const location = useLocation();
@@ -20,6 +21,7 @@ const PageContent = () => {
   return (
     <>
      <Toaster position="top-right" />
+      {isHome && <NavbarComponent />}  {/* ✅ Show Navbar only on home page */}
       {isHome && (
         <>
           <div id="home" className="scroll-mt-24"><Home /></div>
@@ -33,6 +35,7 @@ const PageContent = () => {
 
       <Routes>
         <Route path="/auth" element={<AuthPage />} />
+         <Route path="*" element={<Notfound />} />
       </Routes>
     </>
   );
@@ -45,8 +48,6 @@ function App() {
    
     
     <Router>
-      <NavbarComponent />
-      
       <PageContent />
     </Router>
     </>

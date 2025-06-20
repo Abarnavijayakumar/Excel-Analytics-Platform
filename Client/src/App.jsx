@@ -13,29 +13,23 @@ import Dashboard from './Components/Dashboard';
 import Notfound from './Components/Notfound';
 
 const PageContent = () => {
-  const location = useLocation();
-
-  // Show landing sections only on "/"
-  const isHome = location.pathname === '/';
-
   return (
     <>
-     <Toaster position="top-right" />
-      {isHome && <NavbarComponent />}  {/* ✅ Show Navbar only on home page */}
-      {isHome && (
-        <>
-          <div id="home" className="scroll-mt-24"><Home /></div>
-          <div id="about" className="scroll-mt-24"><About /></div>
-          <div id="Charts" className="scroll-mt-24"><Chart /></div>
-          <div id="pricing" className="scroll-mt-24"><Pricing /></div>
-          <div id="contact" className="scroll-mt-24"><Contact /></div>
-           <div id="Dashboard" className="scroll-mt-24"><Dashboard /></div>
-        </>
-      )}
-
+      <Toaster position="top-right" />
       <Routes>
+        <Route path="/" element={
+          <>
+            <NavbarComponent />
+            <div id="home" className="scroll-mt-24"><Home /></div>
+            <div id="about" className="scroll-mt-24"><About /></div>
+            <div id="Charts" className="scroll-mt-24"><Chart /></div>
+            <div id="pricing" className="scroll-mt-24"><Pricing /></div>
+            <div id="contact" className="scroll-mt-24"><Contact /></div>
+            <div id="Dashboard" className="scroll-mt-24"><Dashboard /></div>
+          </>
+        } />
         <Route path="/auth" element={<AuthPage />} />
-         <Route path="*" element={<Notfound />} />
+        <Route path="*" element={<Notfound />} />
       </Routes>
     </>
   );
